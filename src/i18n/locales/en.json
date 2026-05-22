@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "quizzes": "Quizzes",
+    "leaderboard": "Leaderboard",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "home": {
+    "title": "Welcome to QuizArena",
+    "subtitle": "Create quizzes, challenge the community, climb the leaderboard.",
+    "cta": "Browse quizzes"
+  },
+  "quiz": {
+    "create": "Create a quiz"
+  },
+  "section_titles": {
+    "popular_quizzes": "Popular Quizzes"
+  },
+  "quiz_info": {
+    "question_count": "{{count}} questions",
+    "by": "by",
+    "play": "Play"
+  },
+  "levels": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
+  },
+  "categories": {
+    "geography": "Geography",
+    "history": "History",
+    "sciences": "Sciences"
+  },
+  "content": {
+    "general_culture": "General Knowledge",
+    "french_history": "History of France",
+    "advanced_science": "Advanced Science"
+  }
+}

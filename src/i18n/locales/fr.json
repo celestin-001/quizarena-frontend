@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "quizzes": "Quiz",
+    "leaderboard": "Classement",
+    "profile": "Profil",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S'inscrire"
+  },
+  "home": {
+    "title": "Bienvenue sur QuizArena",
+    "subtitle": "Crée des quiz, défie la communauté, grimpe au classement.",
+    "cta": "Parcourir les quiz"
+  },
+  "quiz": {
+    "create": "Créer un quiz"
+  },
+  "section_titles": {
+    "popular_quizzes": "Quiz populaires"
+  },
+  "quiz_info": {
+    "question_count": "{{count}} questions",
+    "by": "par",
+    "play": "Jouer"
+  },
+  "levels": {
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile"
+  },
+  "categories": {
+    "geography": "Géographie",
+    "history": "Histoire",
+    "sciences": "Sciences"
+  },
+  "content": {
+    "general_culture": "Culture générale",
+    "french_history": "Histoire de France",
+    "advanced_science": "Science avancée"
+  }
+}
