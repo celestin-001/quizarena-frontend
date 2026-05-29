@@ -103,7 +103,7 @@ export default function QuizzesPage() {
                             <div className="flex items-center gap-3">
                                 <DifficultyBadge difficulty={quiz.difficulty as Difficulty} />
                                 <button
-                                    onClick={() => navigate(`/game/${quiz.id}`)}
+                                    onClick={() => navigate(`/quizzes/${quiz.id}`)}
                                     className="text-xs bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg font-medium hover:bg-indigo-100 transition"
                                 >
                                     Jouer

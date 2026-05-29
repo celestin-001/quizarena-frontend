@@ -11,6 +11,8 @@ import GamePage from '../pages/GamePage';
 import ResultsPage from '../pages/ResultsPage';
 import { useAuth } from '../contexts/AuthContext';
 import LeaderboardPage from '../pages/LeaderboardPage';
+import QuizEditPage from '../pages/QuizEditPage';
+
 
 
 function GuestRoute({ children }: { children: React.ReactNode }) {
@@ -41,6 +43,9 @@ export default function AppRouter() {
                     } />
                     <Route path="/leaderboard" element={<LeaderboardPage />} />
                 </Route>
+                <Route path="/quizzes/:id/edit" element={
+                    <ProtectedRoute><QuizEditPage /></ProtectedRoute>
+                } />
 
             </Routes>
 
