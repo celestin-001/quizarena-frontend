@@ -37,7 +37,7 @@ export default function QuizEditPage() {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
-    // Pré-remplir le formulaire avec les données existantes
+
     useEffect(() => {
         if (!quiz) return;
         setTitle(quiz.title);
@@ -137,21 +137,21 @@ export default function QuizEditPage() {
                         {t('quiz.edit')}
                     </h1>
                     <p className="text-sm text-gray-500 mt-1">
-                        Modifie les informations et les questions du quiz.
+                        {t('quiz.editSubtitle')}
                     </p>
                 </div>
                 <button
                     onClick={() => navigate(`/quizzes/${id}`)}
-                    className="text-sm text-gray-500 hover:text-gray-700 transition"
+                    className="text-sm text-gray-500 hover:text-gray-700 transition flex items-center gap-1"
                 >
-                    ← Retour
+                    ← {t('common.back')}
                 </button>
             </div>
 
             {/* Succès */}
             {success && (
                 <div className="mb-6 text-sm text-green-600 bg-green-50 border border-green-100 rounded-lg px-4 py-3">
-                    ✅ Quiz mis à jour ! Redirection en cours...
+                    🎉 {t('quiz.editSuccessRedirect')}
                 </div>
             )}
 
@@ -165,11 +165,11 @@ export default function QuizEditPage() {
             {/* Infos du quiz */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 mb-6 shadow-sm">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4">
-                    Informations du quiz
+                    {t('quiz.manualInfoTitle')}
                 </h2>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-medium text-gray-600">Titre *</label>
+                        <label className="text-xs font-medium text-gray-600">{t('quiz.titleField')} *</label>
                         <input
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
@@ -178,7 +178,7 @@ export default function QuizEditPage() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-medium text-gray-600">Description</label>
+                        <label className="text-xs font-medium text-gray-600">{t('quiz.descriptionField')}</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -189,13 +189,13 @@ export default function QuizEditPage() {
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-medium text-gray-600">Catégorie *</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.categoryLabel')} *</label>
                             <select
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 className={inputClass}
                             >
-                                <option value="">Choisir une catégorie</option>
+                                <option value="">{t('quiz.selectCategoryPlaceholder')}</option>
                                 {CATEGORIES.map((c) => (
                                     <option key={c} value={c}>{c}</option>
                                 ))}
@@ -203,14 +203,14 @@ export default function QuizEditPage() {
                         </div>
 
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-medium text-gray-600">Difficulté</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.difficultyLabel')}</label>
                             <select
                                 value={difficulty}
                                 onChange={(e) => setDifficulty(e.target.value)}
                                 className={inputClass}
                             >
                                 {DIFFICULTIES.map((d) => (
-                                    <option key={d.value} value={d.value}>{d.label}</option>
+                                    <option key={d.value} value={d.value}>{t(`quiz.diff.${d.value}`)}</option>
                                 ))}
                             </select>
                         </div>
@@ -229,23 +229,23 @@ export default function QuizEditPage() {
                     >
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-                                Question {qIndex + 1}
+                                {t('quiz.questionIndexTitle', { index: qIndex + 1 })}
                                 {q.isNew && (
                                     <span className="text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">
-                    Nouvelle
-                  </span>
+                                {t('quiz.badgeNewQuestion')}
+                            </span>
                                 )}
                             </h3>
                             <button
                                 onClick={() => removeQuestion(qIndex)}
                                 className="text-xs text-red-400 hover:text-red-600 transition"
                             >
-                                Supprimer
+                                {t('common.delete')}
                             </button>
                         </div>
 
                         <div className="flex flex-col gap-1.5 mb-4">
-                            <label className="text-xs font-medium text-gray-600">Énoncé *</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.statementLabel')} *</label>
                             <input
                                 value={q.text}
                                 onChange={(e) => updateQuestion(qIndex, 'text', e.target.value)}
@@ -255,7 +255,7 @@ export default function QuizEditPage() {
 
                         <div className="flex flex-col gap-2 mb-4">
                             <label className="text-xs font-medium text-gray-600">
-                                Options (sélectionne la bonne réponse)
+                                {t('quiz.optionsLabel')}
                             </label>
                             {q.options.map((option, oIndex) => (
                                 <div key={oIndex} className="flex items-center gap-3">
@@ -272,7 +272,7 @@ export default function QuizEditPage() {
                                     <input
                                         value={option}
                                         onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
-                                        placeholder={`Option ${optionLetters[oIndex]}`}
+                                        placeholder={`${t('quiz.optionSingle')} ${optionLetters[oIndex]}`}
                                         className={inputClass}
                                     />
                                 </div>
@@ -280,7 +280,7 @@ export default function QuizEditPage() {
                         </div>
 
                         <div className="flex items-center gap-3">
-                            <label className="text-xs font-medium text-gray-600">Points :</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.pointsLabel')}</label>
                             <select
                                 value={q.points}
                                 onChange={(e) =>
@@ -302,7 +302,7 @@ export default function QuizEditPage() {
                 onClick={addQuestion}
                 className="w-full py-3 border-2 border-dashed border-gray-200 rounded-2xl text-sm text-gray-400 hover:border-indigo-300 hover:text-indigo-500 transition mb-8"
             >
-                + Ajouter une question
+                + {t('quiz.addQuestionButton')}
             </button>
 
             {/* Actions */}
@@ -311,14 +311,14 @@ export default function QuizEditPage() {
                     onClick={() => navigate(`/quizzes/${id}`)}
                     className="text-sm px-5 py-2.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition"
                 >
-                    Annuler
+                    {t('common.cancel')}
                 </button>
                 <button
                     onClick={handleSave}
                     disabled={isSaving}
                     className="text-sm px-6 py-2.5 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {isSaving ? 'Sauvegarde...' : 'Sauvegarder les modifications'}
+                    {isSaving ? t('common.savingInProgress') : t('quiz.saveChangesButton')}
                 </button>
             </div>
         </div>

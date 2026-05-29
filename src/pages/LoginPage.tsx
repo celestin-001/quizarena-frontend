@@ -61,6 +61,7 @@ export default function LoginPage() {
                         </div>
                     )}
 
+                    {/* Email */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-xs font-medium text-gray-600">
                             {t('auth.email')}
@@ -75,6 +76,7 @@ export default function LoginPage() {
                         />
                     </div>
 
+                    {/* Mot de passe */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-xs font-medium text-gray-600">
                             {t('auth.password')}
@@ -89,12 +91,13 @@ export default function LoginPage() {
                         />
                     </div>
 
+                    {/* Bouton de soumission */}
                     <button
                         type="submit"
                         disabled={isLoading}
                         className="w-full bg-indigo-600 text-white text-sm font-medium py-2.5 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed mt-1"
                     >
-                        {isLoading ? 'Connexion...' : t('nav.login')}
+                        {isLoading ? t('nav.login') + '...' : t('nav.login')}
                     </button>
                 </form>
             </div>

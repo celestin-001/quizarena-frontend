@@ -161,14 +161,14 @@ export default function QuizCreatePage() {
                         {t('quiz.create')}
                     </h1>
                     <p className="text-sm text-gray-500 mt-1">
-                        Remplis les informations puis ajoute tes questions.
+                        {t('quiz.createSubtitle')}
                     </p>
                 </div>
                 <button
                     onClick={() => navigate('/quizzes')}
-                    className="text-sm text-gray-500 hover:text-gray-700 transition"
+                    className="text-sm text-gray-500 hover:text-gray-700 transition flex items-center gap-1"
                 >
-                    ← Retour
+                    ← {t('common.back')}
                 </button>
             </div>
 
@@ -183,44 +183,44 @@ export default function QuizCreatePage() {
             <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-6">
                 <div className="flex items-center justify-between mb-3">
                     <div>
-                        <h2 className="text-sm font-semibold text-indigo-900">
-                            ✨ Importer depuis Open Trivia DB
+                        <h2 className="text-sm font-semibold text-indigo-900 flex items-center gap-1">
+                            ✨ {t('quiz.importTitle')}
                         </h2>
                         <p className="text-xs text-indigo-500 mt-0.5">
-                            Génère automatiquement un quiz avec des questions traduites en français.
+                            {t('quiz.importSubtitle')}
                         </p>
                     </div>
                     <button
                         onClick={() => setShowImport(!showImport)}
                         className="text-xs font-medium text-indigo-600 hover:text-indigo-800 transition"
                     >
-                        {showImport ? 'Masquer ▲' : 'Utiliser ▼'}
+                        {showImport ? t('common.hide') : t('common.use')}
                     </button>
                 </div>
 
                 {showImport && (
                     <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-indigo-100">
 
-                        {/* Titre */}
+                        {/* Titre import */}
                         <div className="flex flex-col gap-1.5">
                             <label className="text-xs font-medium text-indigo-700">
-                                Titre du quiz *
+                                {t('quiz.quizTitleLabel')} *
                             </label>
                             <input
                                 value={importTitle}
                                 onChange={(e) => setImportTitle(e.target.value)}
-                                placeholder="Ex: Quiz culture générale"
+                                placeholder={t('quiz.importTitlePlaceholder')}
                                 className="w-full text-sm px-3 py-2.5 rounded-lg border border-indigo-200 bg-white focus:outline-none focus:border-indigo-400 transition"
                             />
                         </div>
 
-                        {/* Catégorie + Difficulté + Nombre — 3 colonnes */}
+                        {/* Catégorie + Difficulté + Nombre -> 3 colonnes */}
                         <div className="grid grid-cols-3 gap-3">
 
-                            {/* Catégorie */}
+                            {/* Catégorie import */}
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-indigo-700">
-                                    Catégorie
+                                    {t('quiz.categoryLabel')}
                                 </label>
                                 <select
                                     value={importCategoryId ?? ''}
@@ -231,7 +231,7 @@ export default function QuizCreatePage() {
                                     }
                                     className="text-sm px-3 py-2.5 rounded-lg border border-indigo-200 bg-white focus:outline-none focus:border-indigo-400 transition"
                                 >
-                                    <option value="">Toutes</option>
+                                    <option value="">{t('quiz.allCategories')}</option>
                                     {triviaCategories.map((cat) => (
                                         <option key={cat.id} value={cat.id}>
                                             {cat.name}
@@ -240,10 +240,10 @@ export default function QuizCreatePage() {
                                 </select>
                             </div>
 
-                            {/* Difficulté */}
+                            {/* Difficulté import */}
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-indigo-700">
-                                    Difficulté
+                                    {t('quiz.difficultyLabel')}
                                 </label>
                                 <select
                                     value={importDifficulty}
@@ -252,16 +252,16 @@ export default function QuizCreatePage() {
                                     }
                                     className="text-sm px-3 py-2.5 rounded-lg border border-indigo-200 bg-white focus:outline-none focus:border-indigo-400 transition"
                                 >
-                                    <option value="easy">Facile</option>
-                                    <option value="medium">Moyen</option>
-                                    <option value="hard">Difficile</option>
+                                    <option value="easy">{t('quiz.diff.easy')}</option>
+                                    <option value="medium">{t('quiz.diff.medium')}</option>
+                                    <option value="hard">{t('quiz.diff.hard')}</option>
                                 </select>
                             </div>
 
-                            {/* Nombre de questions */}
+                            {/* Nombre de questions import */}
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-indigo-700">
-                                    Questions
+                                    {t('quiz.questionsLabel')}
                                 </label>
                                 <select
                                     value={importAmount}
@@ -269,7 +269,9 @@ export default function QuizCreatePage() {
                                     className="text-sm px-3 py-2.5 rounded-lg border border-indigo-200 bg-white focus:outline-none focus:border-indigo-400 transition"
                                 >
                                     {[5, 10, 15, 20].map((n) => (
-                                        <option key={n} value={n}>{n} questions</option>
+                                        <option key={n} value={n}>
+                                            {t('quiz.countQuestions', { count: n })}
+                                        </option>
                                     ))}
                                 </select>
                             </div>
@@ -281,35 +283,35 @@ export default function QuizCreatePage() {
                             className="w-full py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {isImporting
-                                ? '⏳ Import et traduction en cours...'
-                                : `🎲 Importer ${importAmount} questions en français`}
+                                ? t('quiz.importingInProgress')
+                                : t('quiz.importSubmitButton', { count: importAmount })}
                         </button>
                     </div>
                 )}
             </div>
 
-            {/* Infos du quiz */}
+            {/* Infos manuelles du quiz */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 mb-6 shadow-sm">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4">
-                    Informations du quiz
+                    {t('quiz.manualInfoTitle')}
                 </h2>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-medium text-gray-600">Titre *</label>
+                        <label className="text-xs font-medium text-gray-600">{t('quiz.titleField')} *</label>
                         <input
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder="Ex: Culture générale"
+                            placeholder={t('quiz.titleFieldPlaceholder')}
                             className={inputClass}
                         />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-medium text-gray-600">Description</label>
+                        <label className="text-xs font-medium text-gray-600">{t('quiz.descriptionField')}</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            placeholder="Une courte description du quiz..."
+                            placeholder={t('quiz.descriptionFieldPlaceholder')}
                             rows={2}
                             className={`${inputClass} resize-none`}
                         />
@@ -317,13 +319,13 @@ export default function QuizCreatePage() {
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-medium text-gray-600">Catégorie *</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.categoryLabel')} *</label>
                             <select
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 className={inputClass}
                             >
-                                <option value="">Choisir une catégorie</option>
+                                <option value="">{t('quiz.selectCategoryPlaceholder')}</option>
                                 {CATEGORIES.map((c) => (
                                     <option key={c} value={c}>{c}</option>
                                 ))}
@@ -331,14 +333,14 @@ export default function QuizCreatePage() {
                         </div>
 
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-medium text-gray-600">Difficulté</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.difficultyLabel')}</label>
                             <select
                                 value={difficulty}
                                 onChange={(e) => setDifficulty(e.target.value)}
                                 className={inputClass}
                             >
                                 {DIFFICULTIES.map((d) => (
-                                    <option key={d.value} value={d.value}>{d.label}</option>
+                                    <option key={d.value} value={d.value}>{t(`quiz.diff.${d.value}`)}</option>
                                 ))}
                             </select>
                         </div>
@@ -346,7 +348,7 @@ export default function QuizCreatePage() {
                 </div>
             </div>
 
-            {/* Questions */}
+            {/* Zone des Questions dynamiques */}
             <div className="flex flex-col gap-4 mb-6">
                 {questions.map((q, qIndex) => (
                     <div
@@ -355,30 +357,30 @@ export default function QuizCreatePage() {
                     >
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-sm font-semibold text-gray-900">
-                                Question {qIndex + 1}
+                                {t('quiz.questionIndexTitle', { index: qIndex + 1 })}
                             </h3>
                             <button
                                 onClick={() => removeQuestion(qIndex)}
                                 disabled={questions.length === 1}
                                 className="text-xs text-red-400 hover:text-red-600 transition disabled:opacity-30"
                             >
-                                Supprimer
+                                {t('common.delete')}
                             </button>
                         </div>
 
                         <div className="flex flex-col gap-1.5 mb-4">
-                            <label className="text-xs font-medium text-gray-600">Énoncé *</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.statementLabel')} *</label>
                             <input
                                 value={q.text}
                                 onChange={(e) => updateQuestion(qIndex, 'text', e.target.value)}
-                                placeholder="Ex: Quelle est la capitale de l'Australie ?"
+                                placeholder={t('quiz.statementPlaceholder')}
                                 className={inputClass}
                             />
                         </div>
 
                         <div className="flex flex-col gap-2 mb-4">
                             <label className="text-xs font-medium text-gray-600">
-                                Options (sélectionne la bonne réponse)
+                                {t('quiz.optionsLabel')}
                             </label>
                             {q.options.map((option, oIndex) => (
                                 <div key={oIndex} className="flex items-center gap-3">
@@ -395,18 +397,18 @@ export default function QuizCreatePage() {
                                     <input
                                         value={option}
                                         onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
-                                        placeholder={`Option ${optionLetters[oIndex]}`}
+                                        placeholder={`${t('quiz.optionSingle')} ${optionLetters[oIndex]}`}
                                         className={inputClass}
                                     />
                                 </div>
                             ))}
                             <p className="text-xs text-gray-400">
-                                Clique sur la lettre pour marquer la bonne réponse.
+                                {t('quiz.optionsHelpText')}
                             </p>
                         </div>
 
                         <div className="flex items-center gap-3">
-                            <label className="text-xs font-medium text-gray-600">Points :</label>
+                            <label className="text-xs font-medium text-gray-600">{t('quiz.pointsLabel')}</label>
                             <select
                                 value={q.points}
                                 onChange={(e) =>
@@ -428,16 +430,16 @@ export default function QuizCreatePage() {
                 onClick={addQuestion}
                 className="w-full py-3 border-2 border-dashed border-gray-200 rounded-2xl text-sm text-gray-400 hover:border-indigo-300 hover:text-indigo-500 transition mb-8"
             >
-                + Ajouter une question
+                + {t('quiz.addQuestionButton')}
             </button>
 
-            {/* Actions */}
+            {/* Actions finales de validation */}
             <div className="flex gap-3 justify-end">
                 <button
                     onClick={() => navigate('/quizzes')}
                     className="text-sm px-5 py-2.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition"
                 >
-                    Annuler
+                    {t('common.cancel')}
                 </button>
                 <button
                     onClick={handleSubmit}
@@ -445,8 +447,8 @@ export default function QuizCreatePage() {
                     className="text-sm px-6 py-2.5 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isLoading
-                        ? 'Création en cours...'
-                        : `Créer le quiz (${questions.length} question${questions.length > 1 ? 's' : ''})`}
+                        ? t('quiz.creationInProgress')
+                        : t('quiz.submitCreateButton', { count: questions.length })}
                 </button>
             </div>
         </div>

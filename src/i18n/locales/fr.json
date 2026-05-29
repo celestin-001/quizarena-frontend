@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Accueil",
     "quizzes": "Quiz",
     "leaderboard": "Classement",
     "profile": "Profil",
@@ -10,32 +11,104 @@
   "home": {
     "title": "Bienvenue sur QuizArena",
     "subtitle": "Crée des quiz, défie la communauté, grimpe au classement.",
-    "cta": "Parcourir les quiz"
+    "cta": "Parcourir les quiz",
+    "popular": "Quiz populaires",
+    "seeAll": "Voir tout ?"
   },
   "quiz": {
-    "create": "Créer un quiz"
-  },
-  "section_titles": {
-    "popular_quizzes": "Quiz populaires"
+    "create": "Créer un quiz",
+    "edit": "Modifier le quiz",
+    "delete": "Supprimer",
+    "play": "Jouer",
+    "back": "Retour aux quiz",
+    "noQuiz": "Aucun quiz trouvé.",
+    "search": "Rechercher un quiz...",
+    "allCategories": "Toutes catégories",
+    "allDifficulties": "Toutes difficultés",
+    "preview": "Aperçu des questions",
+    "loading": "Chargement...",
+    "difficulty": {
+      "easy": "Facile",
+      "medium": "Moyen",
+      "hard": "Difficile",
+      "edit": "Modifier le quiz",
+      "editSubtitle": "Modifie les informations et les questions du quiz.",
+      "editSuccessRedirect": "Quiz mis à jour ! Redirection en cours...",
+      "badgeNewQuestion": "Nouvelle",
+      "saveChangesButton": "Sauvegarder les modifications"
+    },
+
+    "backToList": "Retour aux quiz",
+    "previewQuestions": "Aperçu des questions",
+    "playButton": "Jouer à ce quiz",
+    "editButton": "Modifier ce quiz",
+    "authorBy": "par @{{username}}",
+    "countQuestions": "{{count}} question",
+    "countQuestions_plural": "{{count}} questions"
+
   },
   "quiz_info": {
     "question_count": "{{count}} questions",
     "by": "par",
     "play": "Jouer"
   },
-  "levels": {
-    "easy": "Facile",
-    "medium": "Moyen",
-    "hard": "Difficile"
+  "auth": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "username": "Nom d'utilisateur",
+    "loginTitle": "Connexion",
+    "registerTitle": "Créer un compte",
+    "noAccount": "Pas encore de compte ?",
+    "alreadyAccount": "Déjà un compte ?",
+    "minChars": "Minimum 6 caractères"
+  },
+  "game": {
+    "question": "Question {{current}} sur {{total}}",
+    "score": "Score : {{score}} pts",
+    "next": "Suivant ?",
+    "finish": "Voir les résultats",
+    "correct": "Bonne réponse ! +{{points}} pts",
+    "wrong": "Mauvaise réponse ? {{answer}}"
+  },
+  "results": {
+    "excellent": "Excellent !",
+    "good": "Bien joué !",
+    "bad": "Pas de chance...",
+    "correct": "{{count}} bonne réponse sur {{total}}",
+    "corrects": "{{count}} bonnes réponses sur {{total}}",
+    "success": "% de réussite",
+    "recap": "Récapitulatif",
+    "replay": "Rejouer",
+    "leaderboard": "Voir le classement",
+    "otherQuizzes": "Autres quiz"
+  },
+  "leaderboard": {
+    "title": "Classement",
+    "subtitle": "Les meilleurs joueurs de QuizArena",
+    "empty": "Aucune partie jouée pour le moment. Sois le premier !",
+    "games": "partie",
+    "gamesPlural": "parties",
+    "success": "de réussite",
+    "pts": "pts"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue.",
+    "unauthorized": "Vous devez être connecté.",
+    "notFound": "Page introuvable.",
+    "quizNotFound": "Quiz introuvable."
   },
   "categories": {
     "geography": "Géographie",
     "history": "Histoire",
-    "sciences": "Sciences"
+    "sciences": "Sciences",
+    "culture": "Culture",
+    "sport": "Sport",
+    "music": "Musique"
   },
-  "content": {
-    "general_culture": "Culture générale",
-    "french_history": "Histoire de France",
-    "advanced_science": "Science avancée"
+  "common": {
+    "back": "Retour",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "savingInProgress": "Sauvegarde..."
   }
 }

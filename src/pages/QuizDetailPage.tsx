@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import DifficultyBadge from '../components/ui/DifficultyBadge';
 import Spinner from '../components/ui/Spinner';
 import type { Difficulty } from '../types';
+import {t} from "i18next";
 
 export default function QuizDetailPage() {
     const { id } = useParams<{ id: string }>();
@@ -32,7 +33,7 @@ export default function QuizDetailPage() {
                 onClick={() => navigate('/quizzes')}
                 className="text-sm text-gray-500 hover:text-gray-700 mb-6 block transition"
             >
-                ← Retour aux quiz
+                ← {t('quiz.backToList')}
             </button>
 
             {/* Infos du quiz */}
@@ -45,25 +46,29 @@ export default function QuizDetailPage() {
                     <p className="text-sm text-gray-500 mb-3">{quiz.description}</p>
                 )}
                 <div className="flex items-center gap-4 text-xs text-gray-400">
-                    <span>{quiz.questions.length} questions</span>
-                    <span>·</span>
+            <span>
+                {t('quiz.countQuestions', { count: quiz.questions.length })}
+            </span>
+                    <span>•</span>
                     <span>{quiz.category}</span>
-                    <span>·</span>
-                    <span>par @{quiz.author.username}</span>
+                    <span>•</span>
+                    <span>
+                {t('quiz.authorBy', { username: quiz.author.username })}
+            </span>
                 </div>
             </div>
 
             {/* Aperçu des questions */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-6">
                 <h2 className="text-sm font-semibold text-gray-900 mb-4">
-                    Aperçu des questions
+                    {t('quiz.previewQuestions')}
                 </h2>
                 <div className="flex flex-col gap-3">
                     {quiz.questions.map((q, i) => (
                         <div key={q.id} className="flex items-start gap-3">
-              <span className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                {i + 1}
-              </span>
+                    <span className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        {i + 1}
+                    </span>
                             <span className="text-sm text-gray-700">{q.text}</span>
                         </div>
                     ))}
@@ -76,15 +81,15 @@ export default function QuizDetailPage() {
                     onClick={() => navigate(`/game/${quiz.id}`)}
                     className="w-full py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition text-sm"
                 >
-                    Jouer à ce quiz
+                    {t('quiz.playButton')}
                 </button>
 
                 {user?.id === quiz.author.id && (
                     <button
                         onClick={() => navigate(`/quizzes/${quiz.id}/edit`)}
-                        className="w-full py-3 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition text-sm"
+                        className="w-full py-3 border border-gray-200 text-gray-600 font-medium rounded-xl hover:bg-gray-50 transition text-sm flex items-center justify-center gap-1"
                     >
-                        ✏️ Modifier ce quiz
+                        ✏️ {t('quiz.editButton')}
                     </button>
                 )}
             </div>

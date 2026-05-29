@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useQuiz } from '../hooks/useQuiz';
 import type { GameAnswer } from '../types';
 
@@ -8,6 +9,7 @@ const TIMER_SECONDS = 15;
 type AnswerState = 'idle' | 'correct' | 'wrong';
 
 export default function GamePage() {
+    const { t } = useTranslation();
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const { quiz, isLoading, error } = useQuiz(id ?? '');
@@ -40,7 +42,7 @@ export default function GamePage() {
     useEffect(() => {
         if (answerState !== 'idle' || !question) return;
         if (timeLeft === 0) {
-            // Temps écoulé → mauvaise réponse
+            // Temps écoulé = mauvaise réponse
             setAnswerState('wrong');
             setAnswers((prev) => [
                 ...prev,
@@ -91,7 +93,7 @@ export default function GamePage() {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-64 text-gray-400 text-sm">
-                Chargement du quiz...
+                {t('quiz.loading')}
             </div>
         );
     }
@@ -99,7 +101,7 @@ export default function GamePage() {
     if (error || !quiz || !question) {
         return (
             <div className="flex justify-center items-center h-64 text-red-500 text-sm">
-                {error ?? 'Quiz introuvable.'}
+                {error ?? t('errors.quizNotFound')}
             </div>
         );
     }
@@ -109,9 +111,9 @@ export default function GamePage() {
 
             {/* En-tête : progression + timer */}
             <div className="flex items-center gap-4 mb-6">
-        <span className="text-sm text-gray-400 whitespace-nowrap">
-          Question {currentIndex + 1} sur {total}
-        </span>
+                <span className="text-sm text-gray-400 whitespace-nowrap">
+                    {t('game.question', { current: currentIndex + 1, total })}
+                </span>
                 <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                     <div
                         className="h-full bg-indigo-500 rounded-full transition-all duration-500"
@@ -125,14 +127,16 @@ export default function GamePage() {
                             : 'bg-gray-100 text-gray-600'
                     }`}
                 >
-          {timeLeft}s
-        </span>
+                    {timeLeft}s
+                </span>
             </div>
 
             {/* Score */}
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-base font-medium text-gray-900">{quiz.title}</h1>
-                <span className="text-sm font-medium text-indigo-600">{score} pts</span>
+                <span className="text-sm font-medium text-indigo-600">
+                    {t('game.score', { score })}
+                </span>
             </div>
 
             {/* Question */}
@@ -148,19 +152,19 @@ export default function GamePage() {
                             onClick={() => handleSelect(index)}
                             className={getOptionClass(index)}
                         >
-              <span
-                  className={`w-6 h-6 rounded-full border text-xs font-medium flex items-center justify-center flex-shrink-0 ${
-                      answerState === 'idle'
-                          ? 'border-gray-300 text-gray-500'
-                          : index === question.correctIndex
-                              ? 'border-green-500 text-green-700'
-                              : index === selected
-                                  ? 'border-red-400 text-red-600'
-                                  : 'border-gray-200 text-gray-400'
-                  }`}
-              >
-                {optionLetters[index]}
-              </span>
+                            <span
+                                className={`w-6 h-6 rounded-full border text-xs font-medium flex items-center justify-center flex-shrink-0 ${
+                                    answerState === 'idle'
+                                        ? 'border-gray-300 text-gray-500'
+                                        : index === question.correctIndex
+                                            ? 'border-green-500 text-green-700'
+                                            : index === selected
+                                                ? 'border-red-400 text-red-600'
+                                                : 'border-gray-200 text-gray-400'
+                                }`}
+                            >
+                                {optionLetters[index]}
+                            </span>
                             {option}
                         </button>
                     ))}
@@ -170,20 +174,20 @@ export default function GamePage() {
             {/* Feedback + bouton suivant */}
             {answerState !== 'idle' && (
                 <div className="flex items-center justify-between mt-4">
-          <span
-              className={`text-sm font-medium ${
-                  answerState === 'correct' ? 'text-green-600' : 'text-red-500'
-              }`}
-          >
-            {answerState === 'correct'
-                ? `Bonne réponse ! +${question.points} pts`
-                : `Mauvaise réponse. La bonne réponse était : ${question.options[question.correctIndex]}`}
-          </span>
+                    <span
+                        className={`text-sm font-medium ${
+                            answerState === 'correct' ? 'text-green-600' : 'text-red-500'
+                        }`}
+                    >
+                        {answerState === 'correct'
+                            ? t('game.correct', { points: question.points })
+                            : t('game.wrong', { answer: question.options[question.correctIndex] })}
+                    </span>
                     <button
                         onClick={handleNext}
                         className="text-sm bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition"
                     >
-                        {currentIndex + 1 >= total ? 'Voir les résultats' : 'Suivant →'}
+                        {currentIndex + 1 >= total ? t('game.finish') : t('game.next')}
                     </button>
                 </div>
             )}

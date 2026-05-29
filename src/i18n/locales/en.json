@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Home",
     "quizzes": "Quizzes",
     "leaderboard": "Leaderboard",
     "profile": "Profile",
@@ -10,32 +11,84 @@
   "home": {
     "title": "Welcome to QuizArena",
     "subtitle": "Create quizzes, challenge the community, climb the leaderboard.",
-    "cta": "Browse quizzes"
+    "cta": "Browse quizzes",
+    "popular": "Popular quizzes",
+    "seeAll": "See all ?"
   },
   "quiz": {
-    "create": "Create a quiz"
-  },
-  "section_titles": {
-    "popular_quizzes": "Popular Quizzes"
+    "create": "Create a quiz",
+    "edit": "Edit quiz",
+    "delete": "Delete",
+    "play": "Play",
+    "back": "Back to quizzes",
+    "noQuiz": "No quiz found.",
+    "search": "Search a quiz...",
+    "allCategories": "All categories",
+    "allDifficulties": "All difficulties",
+    "preview": "Questions preview",
+    "loading": "Loading...",
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    }
   },
   "quiz_info": {
     "question_count": "{{count}} questions",
     "by": "by",
     "play": "Play"
   },
-  "levels": {
-    "easy": "Easy",
-    "medium": "Medium",
-    "hard": "Hard"
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "loginTitle": "Login",
+    "registerTitle": "Create an account",
+    "noAccount": "No account yet?",
+    "alreadyAccount": "Already have an account?",
+    "minChars": "Minimum 6 characters"
+  },
+  "game": {
+    "question": "Question {{current}} of {{total}}",
+    "score": "Score: {{score}} pts",
+    "next": "Next ?",
+    "finish": "See results",
+    "correct": "Correct! +{{points}} pts",
+    "wrong": "Wrong ? {{answer}}"
+  },
+  "results": {
+    "excellent": "Excellent!",
+    "good": "Well done!",
+    "bad": "Bad luck...",
+    "correct": "{{count}} correct answer out of {{total}}",
+    "corrects": "{{count}} correct answers out of {{total}}",
+    "success": "% success rate",
+    "recap": "Summary",
+    "replay": "Play again",
+    "leaderboard": "See leaderboard",
+    "otherQuizzes": "Other quizzes"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "subtitle": "QuizArena's best players",
+    "empty": "No games played yet. Be the first!",
+    "games": "game",
+    "gamesPlural": "games",
+    "success": "success rate",
+    "pts": "pts"
+  },
+  "errors": {
+    "generic": "Something went wrong.",
+    "unauthorized": "You must be logged in.",
+    "notFound": "Page not found.",
+    "quizNotFound": "Quiz not found."
   },
   "categories": {
     "geography": "Geography",
     "history": "History",
-    "sciences": "Sciences"
-  },
-  "content": {
-    "general_culture": "General Knowledge",
-    "french_history": "History of France",
-    "advanced_science": "Advanced Science"
+    "sciences": "Sciences",
+    "culture": "Culture",
+    "sport": "Sport",
+    "music": "Music"
   }
 }
