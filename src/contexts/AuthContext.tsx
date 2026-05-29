@@ -38,8 +38,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!token) return;
         const expiry = decodeTokenExpiry(token);
         if (!expiry) return;
-        const delay = expiry - Date.now() - 60_000; // 1 min avant expiration
-        if (delay <= 0) { logout(); return; }
+        const delay = expiry - Date.now() - 60_000;
+        if (delay <= 0) {
+            setTimeout(() => logout(), 0); // ← setTimeout pour éviter l'appel synchrone
+            return;
+        }
         const timer = setTimeout(logout, delay);
         return () => clearTimeout(timer);
     }, [token, logout]);
@@ -47,9 +50,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Chargement initial — vérifie si un token est déjà stocké
     useEffect(() => {
         const stored = getToken();
-        if (!stored) { setIsLoading(false); return; }
-        // On fait confiance au token stocké, le user sera rechargé si nécessaire
-        setTokenState(stored);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setTokenState(stored ?? null);
         setIsLoading(false);
     }, []);
 

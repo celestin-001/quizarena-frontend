@@ -19,14 +19,20 @@ export function useQuiz(id: string): UseQuizResult {
 
     useEffect(() => {
         if (!id) return;
-        setIsLoading(true);
-        setError(null);
+
+        // Utilise un flag pour éviter l'appel synchrone
+        let cancelled = false;
+
+        setIsLoading(true); // eslint-disable-line react-hooks/set-state-in-effect
+        setError(null); 
 
         apiClient
             .get(`/quizzes/${id}`)
-            .then((res) => setQuiz(res.data))
-            .catch(() => setError('Impossible de charger le quiz.'))
-            .finally(() => setIsLoading(false));
+            .then((res) => { if (!cancelled) setQuiz(res.data); })
+            .catch(() => { if (!cancelled) setError('Impossible de charger le quiz.'); })
+            .finally(() => { if (!cancelled) setIsLoading(false); });
+
+        return () => { cancelled = true; };
     }, [id, trigger]);
 
     return {

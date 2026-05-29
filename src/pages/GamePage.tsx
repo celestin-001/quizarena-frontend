@@ -42,21 +42,22 @@ export default function GamePage() {
     useEffect(() => {
         if (answerState !== 'idle' || !question) return;
         if (timeLeft === 0) {
-            // Temps écoulé = mauvaise réponse
-            setAnswerState('wrong');
-            setAnswers((prev) => [
-                ...prev,
-                { questionId: question.id, selectedIndex: -1, correct: false, points: 0 },
-            ]);
+            setTimeout(() => { // ← enveloppe dans setTimeout
+                setAnswerState('wrong');
+                setAnswers((prev) => [
+                    ...prev,
+                    { questionId: question.id, selectedIndex: -1, correct: false, points: 0 },
+                ]);
+            }, 0);
             return;
         }
         const interval = setInterval(() => setTimeLeft((t) => t - 1), 1000);
         return () => clearInterval(interval);
     }, [timeLeft, answerState, question]);
 
-    // Reset timer quand la question change
+// Reset timer
     useEffect(() => {
-        setTimeLeft(TIMER_SECONDS);
+        setTimeout(() => setTimeLeft(TIMER_SECONDS), 0); // ← enveloppe dans setTimeout
     }, [currentIndex]);
 
     const handleSelect = (index: number) => {

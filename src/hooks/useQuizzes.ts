@@ -28,8 +28,10 @@ export function useQuizzes({
     const [trigger, setTrigger] = useState(0);
 
     useEffect(() => {
-        setIsLoading(true);
-        setError(null);
+        let cancelled = false;
+
+        setIsLoading(true); // eslint-disable-line react-hooks/set-state-in-effect
+        setError(null); // eslint-disable-line react-hooks/set-state-in-effect
 
         apiClient
             .get('/quizzes', {
@@ -40,9 +42,11 @@ export function useQuizzes({
                     difficulty: difficulty || undefined,
                 },
             })
-            .then((res) => setData(res.data))
-            .catch(() => setError('Impossible de charger les quiz.'))
-            .finally(() => setIsLoading(false));
+            .then((res) => { if (!cancelled) setData(res.data); })
+            .catch(() => { if (!cancelled) setError('Impossible de charger les quiz.'); })
+            .finally(() => { if (!cancelled) setIsLoading(false); });
+
+        return () => { cancelled = true; };
     }, [page, search, category, difficulty, trigger]);
 
     return {

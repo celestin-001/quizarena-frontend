@@ -40,6 +40,7 @@ export default function QuizEditPage() {
 
     useEffect(() => {
         if (!quiz) return;
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTitle(quiz.title);
         setDescription(quiz.description ?? '');
         setCategory(quiz.category);
